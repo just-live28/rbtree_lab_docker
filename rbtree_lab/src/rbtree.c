@@ -149,8 +149,41 @@ void insert_fixup(rbtree *t, node_t *node) {
 
 
 node_t *rbtree_insert(rbtree *t, const key_t key) {
+  if (t == NULL) return NULL;
   
+  node_t *new_node = malloc(sizeof(node_t));
+  new_node->color = RBTREE_RED;
+  new_node->key = key;
+  new_node->parent = t->nil;
+  new_node->left = t->nil;
+  new_node->right = t->nil;
 
+  if (t->root == t->nil) {
+    new_node->color = RBTREE_BLACK;
+    t->root = new_node;
+  } else {
+    node_t *parent, *cur;
+    cur = t->root;
+    while (cur != t->nil) {
+      if (key == cur->key) {
+        free(new_node);
+        return t->root;
+      } else if (key < cur->key) {
+        parent = cur;
+        cur = cur->left;
+      } else {
+        parent = cur;
+        cur = cur->right;
+      }
+    }
+    if (new_node->key < parent->key) {
+      parent->left = new_node;
+    } else {
+      parent->right = new_node;
+    }
+    new_node->parent = parent;
+  }
+  insert_fixup(t, new_node);
 
   return t->root;
 }
