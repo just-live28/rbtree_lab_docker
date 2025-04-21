@@ -19,20 +19,24 @@ typedef struct {
 } rbtree;
 
 rbtree *new_rbtree(void);
-void delete_rbtree(rbtree *);
+void delete_rbtree(rbtree *t);
 void delete_node(node_t *node, node_t *nil);
 
 void left_rotate(rbtree *t, node_t *axis);
 void right_rotate(rbtree *t, node_t *axis);
-void color_flip(node_t *node, node_t *nil);
-void color_swap(node_t * node, node_t *nil);
+void color_flip(rbtree *t, node_t *node);
+void color_swap(rbtree *t, node_t * node);
 
-node_t *rbtree_insert(rbtree *, const key_t);
+void insert_fixup(rbtree *t, node_t *node);
+node_t *rbtree_insert(rbtree *t, const key_t);
+
 node_t *rbtree_find(const rbtree *, const key_t);
 node_t *rbtree_min(const rbtree *);
 node_t *rbtree_max(const rbtree *);
-int rbtree_erase(rbtree *, node_t *);
 
-int rbtree_to_array(const rbtree *, key_t *, const size_t);
+void erase_fixup(rbtree *t, node_t *p);
+int rbtree_erase(rbtree *t, node_t *p);
+
+int rbtree_to_array(const rbtree *t, key_t *arr, const size_t);
 
 #endif  // _RBTREE_H_
