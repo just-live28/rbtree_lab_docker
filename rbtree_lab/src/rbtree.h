@@ -37,6 +37,7 @@ node_t *rbtree_max(const rbtree *);
 void erase_fixup(rbtree *t, node_t *p);
 int rbtree_erase(rbtree *t, node_t *p);
 
+void inorder_fill(node_t *node, node_t *nil, key_t *arr, int *idx, const size_t n);
 int rbtree_to_array(const rbtree *t, key_t *arr, const size_t);
 
 #endif  // _RBTREE_H_
