@@ -34,6 +34,7 @@ node_t *rbtree_find(const rbtree *, const key_t);
 node_t *rbtree_min(const rbtree *);
 node_t *rbtree_max(const rbtree *);
 
+void transplant(rbtree *t, node_t *u, node_t *v);
 void erase_fixup(rbtree *t, node_t *p);
 int rbtree_erase(rbtree *t, node_t *p);
 
